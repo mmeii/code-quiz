@@ -1,0 +1,27 @@
+body {
+    background-color: #f2f2f2; 
+}
+
+h1, 
+h2 {
+    color: #313740;
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    color: #3290A6;
+    font-family: 'Archivo', sans-serif;
+}
+
+a:hover {
+    color: #99B8BF;
+    font-family: 'Archivo', sans-serif;
+}
+
+span {
+    font-family: 'Archivo', sans-serif;
+}
+
+p {
+    font-family: 'Archivo', sans-serif;
+}

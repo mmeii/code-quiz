@@ -87,6 +87,14 @@ const quizQuestions = [
  */
 
 // grab references to elements
+var startQuizSection = document.getElementById("start");
+var gameTimer = document.getElementById("timer");
+var questionTitle = document.getElementById("quiz-header");
+var questionChoices = document.getElementById("choices");
+var enterInitialsSection = document.getElementById("your-initials");
+var enterInitialsSubmit = document.getElementById("submit-initials");
+var highScoresSection = document.getElementById("scores");
+var viewHighScores = document.getElementById("view-high-score");
 
 // define other variables
 var correctAns = 0;
@@ -103,6 +111,12 @@ var highScore = [];
  */
 
 // WHEN I click the start button
+function startQuiz() {
+    // clear the start section
+    startQuizSection.setAttribute("style", "display: none;");
+    
+}
+
 // THEN a timer starts
 function startCountDown() {
 
