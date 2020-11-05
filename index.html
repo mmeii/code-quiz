@@ -23,18 +23,18 @@
                 <a href="Assets/highscores.html" id="view-high-score">View High Scores</a>
             </div>
             <div class="col text-right" id="timer">
-                Time: <span>0</span>
+                Time: <span id="timeLeft">0</span>
             </div>
         </div>
 
-        <div class="row text-center">
+        <div class="row text-left">
             <div class="col-md-2"></div>
             <main class="col-md-8 mt-5">
-                <h1 class="font-weight-bold" id="quiz-header">Coding Quiz Challenge</h1>
+                <h1 class="font-weight-bold text-center" id="quizQuestion">Coding Quiz Challenge</h1>
                 <div class="row" id="your-initial" style="display: none;">
                     <div class="col-2"></div>
                     <div class="mt-5 col-6 text-left">
-                        <h2>Your final score is <span id="final-score"></span> !</h2>
+                        <h2>Your final score is <span id="finalScore"></span> !</h2>
                         <form>
                             <p>Enter your initials: <input class="form-control mb-2 mt-2" type="text"> 
                             <button type="submit" class="btn btn-info" id="submit-initials">Submit</button>
@@ -44,13 +44,14 @@
                     <div class="col-2"></div>
                 </div>
 
-                <div id="start" class="m-2 ml-5 mr-5">
+                <div id="start" class="m-2 justify-content-center">
                     <p class="p-5">Let's test your knowledge on JavaScript fundamentals! Try to answer the followding code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time by ten seconds!</p>
 
-                    <button type="button" class="btn btn-info text-center" id="start-quiz-button">Start Quiz</button>
+                    <ul id="choices"></ul>
+                    <button type="button" class="btn btn-info ml-5" id="start-quiz-button">Start Quiz</button>
                 </div>
 
-                <div id="choices"></div>
+                
 
                 <div id="scores"></div>
 
