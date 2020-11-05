@@ -97,6 +97,7 @@ var enterInitialsSection = document.getElementById("your-initials");
 var enterInitialsSubmit = document.getElementById("submit-initials");
 var highScoresSection = document.getElementById("scores");
 var viewHighScores = document.getElementById("view-high-score");
+var everything = document.getElementById("everything");
 
 
 // define other variables
@@ -119,7 +120,9 @@ function startCountDown() {
     var startTimer = setInterval(function() {
         totalTime--;
         timeLeft.textContent = totalTime;
-        if(totalTime <= 0) {
+        if(totalTime == 0) {
+            gameOver();
+            timer.textContent = "Time's Up!";
             clearInterval(startTimer);
         }
     },1000);
@@ -137,7 +140,7 @@ function startCountDown() {
     //         }
     //     }, 1000);
     // }
-    render(questionStart); 
+    showQuiz(); 
 };
 
 // var timerId = setTimeout(function() {
@@ -148,30 +151,42 @@ console.log(questions[questionStart].question);
 console.log(questions[questionStart].choices);
 
 // then presented with questions and choices, function to render questions and choices
-function render(questionStart) {
-    quizQuestion.innerHTML = "";
-    start.innerHTML = "";
-    choices.innerHTML = "";
-    var createChoices = document.createElement("ul");
-    createChoices.innerHTML = "";
-    for (var i = 0; i < questions.length; i++) {
-        var quizQues = questions[questionStart].question;
-        var choicesOption = questions[questionStart].choices;
-        quizQuestion.textContent = quizQues;
-        choices.textContent = choicesOption;
+
+function showQuiz() {
+    function quiz(questions){
+        this.score = 0;
+        this.questions = questions;
+        this.questionIndex = 0;
     }
-    choicesOption.forEach(function (eachChoice) {
-        var listChoice = document.createElement("li");
-        listChoice.textContent = eachChoice;
-        start.appendChild(choices);
-        choices.appendChild(listChoice);
-        listChoice.addEventListener("click", checkAnswer);
-    })
+    quizQuestion.innerHTML = quiz.getQuestionIndex().text;
+
+    
 }
+
+// function render(questionStart) {
+//     quizQuestion.innerHTML = "";
+//     start.innerHTML = "";
+//     choices.innerHTML = "";
+//     var createChoices = document.createElement("ul");
+//     createChoices.innerHTML = "";
+//     for (var i = 0; i < questions.length; i++) {
+//         var quizQues = questions[questionStart].question;
+//         var choicesOption = questions[questionStart].choices;
+//         quizQuestion.textContent = quizQues;
+//         choices.textContent = choicesOption;
+//     }
+//     choicesOption.forEach(function (eachChoice) {
+//         var listChoice = document.createElement("li");
+//         listChoice.textContent = eachChoice;
+//         start.appendChild(choices);
+//         choices.appendChild(listChoice);
+//         listChoice.addEventListener("click", checkAnswer);
+//     })
+// }
 
 // after question is answered, show if correct or wrong
 function checkAnswer() {
-    var showResult = document.createElement("ul") 
+
     // if wrong, time is subtracted from the clock
 
 }
