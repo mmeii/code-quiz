@@ -20,21 +20,22 @@
         <!-- top for highscore link and timer -->
         <div class="row">
             <div class="col text-left">
-                <a href="#highScore" id="view-high-score">View High Scores</a>
+                <a href="#" id="viewHighScore">View High Scores</a>
             </div>
-            <div class="col text-right" id="timer">
+            <div id="timer" class="col text-right">
                 <i class="far fa-clock"></i> Time: <span id="timeLeft">0</span>
             </div>
+            <div id="timesUp" class="col text-right" style="display: none;">Time's Up!</div>
         </div>
 
-        <div class="row text-left" id="everything">
+        <div id="everything" class="row text-left">
             <div class="col-md-2"></div>
               <main class="col-md-8 mt-5">
                   <!--start screen  -->
                   <div id="start" class="m-2 justify-content-center">
                       <h1 class="font-weight-bold pl-5 pr-5">Coding Quiz Challenge</h1>
                       <p class="p-5">Let's test your knowledge on JavaScript fundamentals! Try to answer the followding code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time by ten seconds!</p>
-                      <button type="button" class="btn btn-info ml-5 align-center" id="start-quiz-button">Start Quiz</button>
+                      <button type="button" id="start-quiz-button" class="btn btn-info ml-5 align-center">Start Quiz</button>
                   </div>
 
                   <!--quiz div  -->
@@ -56,8 +57,8 @@
                         <div class="col-8 text-left">
                             <h2 class="font-weight-bold pt-2 pb-3 m-2">Your final score is <span id="finalScore"></span> !</h2>
                             <form>
-                                <p class="pt-2 pb-3 m-2">Enter your initials: <input class="form-control pt-2 pb-3 mt-2" type="text" id="initialInput">
-                                <button type="submit" class="btn btn-info mt-3" id="submitInitialBtn">Submit</button>
+                                <p class="pt-2 pb-3 m-2">Enter your initials: <input id="initialInput" class="form-control pt-2 pb-3 mt-2" type="text">
+                                <button type="submit" id="submitInitialBtn" class="btn btn-info mt-3">Submit</button>
                                 </p>
                             </form>
                         </div>
@@ -67,6 +68,7 @@
                 <!-- highscores section -->
                 <div id="highScoreSection" class="pl-5 ml-4 pt-5 justify-content-center font-weight-bold" style="display: none;">
                     <h2 class="font-weight-bold pt-2 pb-3 mb-2">High Scores</h2>
+                    <div id="listOfHighScores" class="pt-2 pb-3 mb-2"></div>
                     <p>
                         <button type="submit" class="btn btn-info mt-3 mr-3" id="goBackBtn">Go Back</button>
                         <button type="submit" class="btn btn-info mt-3" id="clearHighScoreBtn">Clear High Score</button>
