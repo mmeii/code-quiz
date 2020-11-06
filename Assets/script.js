@@ -100,21 +100,25 @@ var answerCheck = document.getElementById("answerCheck");
 
 var summary = document.getElementById("summary");
 var submitInitialBtn = document.getElementById("submitInitialBtn");
+var initialInput = document.getElementById("initialInput");
 var everything = document.getElementById("everything");
 
 var highScoreSection = document.getElementById("highScoreSection");
 var finalScore = document.getElementById("finalScore");
 var highScore = document.getElementById("highScore");
+
+
 var goBackBtn = document.getElementById("goBackBtn");
 var clearHighScoreBtn = document.getElementById("clearHighScoreBtn"); 
 var viewHighScore = document.getElementById("viewHighScore");
+var listOfHighScores = document.getElementById("listOfHighScores");
 
 
 // define other variables
 var correctAns = 0;
 var questionNum = 0;
 var scoreResult;
-var highScore = [];
+var highScores = [];
 var questionIndex = 0;
 
 /**
@@ -138,7 +142,7 @@ function newQuiz() {
         timeLeft.textContent = totalTime;
         if(totalTime <= 0) {
             clearInterval(startTimer);
-            if (questionIndex < questions.length) {
+            if (questionIndex < questions.length - 1) {
                 gameOver();
             }
         }
@@ -182,9 +186,9 @@ function checkAnswer(answer) {
         answerCheck.textContent = "Wrong! The correct answer is: " + questions[questionIndex].answer;
     }
 
+    questionIndex++;
     // repeat with the rest of questions 
-    if (questionIndex < questions.length - 1) {
-        questionIndex++;
+    if (questionIndex < questions.length) {
         nextQuestion();
     } else {
         // if no more question, run game over function
@@ -201,7 +205,7 @@ function chooseC() { checkAnswer(2); }
 function chooseD() { checkAnswer(3); }
 
 // when all questions are answered or timer reaches 0, game over
-function gameOver () {
+function gameOver() {
     summary.style.display = "block";
     questionDiv.style.display = "none";
     startDiv.style.display = "none";
@@ -213,27 +217,80 @@ function gameOver () {
 }
 
 // enter initial and store highscore in local storage
-function storeHighScore () {
+function storeHighScores() {
+    if (initialInput.value === "") {
+        alert("Please enter your initials!");
+        return;
+    } 
     // event.preventDefault();
+    startDiv.style.display = "none";
+    timer.style.display = "none";
+    timesUp.style.display = "none";
+    summary.style.display = "none";
+    highScoreSection.style.display = "block";   
+
+    var savedHighScores = localStorage.getItem("high scores");
+    var scoresArray;
+
+    if (savedHighScores === null) {
+        scoresArray = [];
+    }else {
+        scoresArray = JSON.parse(savedHighScores)
+    }
+
+    var userScore = {
+        initials: initialInput.value,
+        score: finalScore.textContent
+    };
+
+
+    console.log(userScore);
+    scoresArray.push(userScore);
+
+    var scoresArrayString = JSON.stringify(scoresArray);
+    // console.log(highScoreString);
+    // store scores into local storage
+    window.localStorage.setItem("high scores", scoresArrayString);
+    
+    // show current highscores
+    showHighScores();
+}
+
+// function to show high scores
+var i = 0;
+function showHighScores() {
     startDiv.style.display = "none";
     timer.style.display = "none";
     timesUp.style.display = "none";
     summary.style.display = "none";
     highScoreSection.style.display = "block";
 
-    var initialInput = document.getElementById("initialInput");
+    var savedHighScores = localStorage.getItem("high scores");
 
-    var userScores = {
-        initials: initialInput.value,
-        score: finalScore.textContent
-    };
+    // check if there is any in local storage
+    if (savedHighScores === null) {
+        return;
+    }
+    console.log(savedHighScores);
 
-    highScore.push(userScores);
+    var storedHighScores = JSON.parse(savedHighScores);
+    highScores = storedHighScores;
 
-    var highScoreString = JSON.stringify(highScore);
+    // loop for new highscores and append to show
 
-    // store scores into local storage
-    window.localStorage.setItem("high scores", highScoreString);    
+    // highScores.forEach(function (newHighScore) {
+    //     var newHighScoreEntry = document.createElement("li");
+    //     newHighScoreEntry.textContent = newHighScore;
+    //     listOfHighScores.appendChild("createLi");
+    //     createLi.appendChild(newHighScoreEntry);
+    // })
+
+    for (; i < highScores.length; i++) {
+        var eachNewHighScore = document.createElement("p");
+        // eachNewHighScore.setAttribute()
+        eachNewHighScore.innerHTML = highScores[i].initials + ": " + highScores[i].score;
+        listOfHighScores.appendChild(eachNewHighScore);
+    }
 }
 
 /**
@@ -245,9 +302,16 @@ choiceA.addEventListener("click", chooseA);
 choiceB.addEventListener("click", chooseB);
 choiceC.addEventListener("click", chooseC);
 choiceD.addEventListener("click", chooseD);
-submitInitialBtn.addEventListener("click", storeHighScore);
+submitInitialBtn.addEventListener("click", storeHighScores);
+viewHighScore.addEventListener("click", showHighScores);
+
 goBackBtn.addEventListener("click", function() {
     startDiv.style.display = "block";
     highScoreSection.style.display = "none";
 });
-viewHighScore.addEventListener("click", storeHighScore);
+
+clearHighScoreBtn.addEventListener("click", function(){
+    window.localStorage.removeItem("high scores");
+    listOfHighScores.innerHTML = "High Score Cleared!";
+    listOfHighScores.setAttribute("style", "font-family: 'Archivo', sans-serif; font-style: italic;")
+});

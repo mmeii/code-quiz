@@ -24,6 +24,11 @@ a:hover {
     background-color: #343a40;
 }
 
+#finalScore {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
 span {
     font-family: 'Archivo', sans-serif;
 }
