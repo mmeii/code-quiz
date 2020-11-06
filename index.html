@@ -29,44 +29,47 @@
 
         <div class="row text-left" id="everything">
             <div class="col-md-2"></div>
-            <main class="col-md-8 mt-5">
-                <h1 class="font-weight-bold pl-5 pr-5" id="quizQuestion">Coding Quiz Challenge</h1>
-                <div class="row" id="your-initial" style="display: none;">
-                    <div class="col-2"></div>
-                    <div class="mt-5 col-6 text-left">
-                        <h2>Your final score is <span id="finalScore"></span> !</h2>
-                        <form>
-                            <p>Enter your initials: <input class="form-control mb-2 mt-2" type="text"> 
-                            <button type="submit" class="btn btn-info" id="submit-initials">Submit</button>
-                            </p>
-                        </form>    
+              <main class="col-md-8 mt-5">
+                  <!--start screen  -->
+                  <div id="start" class="m-2 justify-content-center">
+                      <h1 class="font-weight-bold pl-5 pr-5">Coding Quiz Challenge</h1>
+                      <p class="p-5">Let's test your knowledge on JavaScript fundamentals! Try to answer the followding code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time by ten seconds!</p>
+                      <button type="button" class="btn btn-info ml-5 align-center" id="start-quiz-button">Start Quiz</button>
+                  </div>
+
+                  <!--quiz div  -->
+                  <div id = "questionDiv" style="display: none;">
+                    <p id = "questionTitle" class="p-5"></p>
+                    <div class="pl-5 pt-5 pb-3 m-2 justify-content-center">
+                        <p><button id="btn0" class="btn btn-dark"></button></p>
+                        <p><button id="btn1" class="btn btn-dark"></button></p>
+                        <p><button id="btn2" class="btn btn-dark"></button></p>
+                        <p><button id="btn3" class="btn btn-dark"></button></p>
                     </div>
-                    <div class="col-2"></div>
-                </div>
+                    <div id="answerCheck" style="display: none;"> </div>
+                  </div>
 
-                <div id="start" class="m-2 justify-content-center">
-                    <p class="p-5">Let's test your knowledge on JavaScript fundamentals! Try to answer the followding code-related questions within the time limit. Keep in mind that incorrect answers will penalize your time by ten seconds!</p>
+                  <!-- score div -->
+                  <div class="row" id="summary" style="display: none;">
+                      <div class="col-2"></div>
+                      <div class="mt-5 col-6 text-left">
+                          <h2>Your final score is <span id="finalScore"></span> !</h2>
+                          <form>
+                              <p>Enter your initials: <input class="form-control mb-2 mt-2" type="text">
+                              <button type="submit" class="btn btn-info" id="submit-initials">Submit</button>
+                              </p>
+                          </form>
+                      </div>
+                      <div class="col-2"></div>
+                  </div>
 
-                    
-
-                    <button type="button" class="btn btn-info ml-5 align-center" id="start-quiz-button">Start Quiz</button>
-                </div>
-
-                <div id="choices" class="pl-5 pt-5 pb-3 m-2 justify-content-center" style="display: none;">
-                    <p><button id="btn0" class="btn btn-dark"><span id="choice0">A</span></button></p>
-                    <p><button id="btn1" class="btn btn-dark"><span id="choice1">B</span></button></p>
-                    <p><button id="btn2" class="btn btn-dark"><span id="choice2">C</span></button></p>
-                    <p><button id="btn3" class="btn btn-dark"><span id="choice3">D</span></button></p>
-                </div>
-
-                
-
-                <div id="scores"></div>
-
-            </main>
+                  <div id="scores"></div>
+              </main>
             <div class="col-md-2"></div>
         </div>
 
+        <div id = "highScore" style="display: none;">
+        </div>
     </div>
 
     <!-- linking js -->

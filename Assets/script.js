@@ -87,18 +87,27 @@ const questions = [
  */
 
 // grab references to elements
-var start = document.getElementById("start");
 var time = document.getElementById("timer");
-var startQuizBtn = document.getElementById("start-quiz-button");
 var timeLeft = document.getElementById("timeLeft");
-var quizQuestion = document.getElementById("quizQuestion");
-var choices = document.getElementById("choices");
-var enterInitialsSection = document.getElementById("your-initials");
+
+var startDiv = document.getElementById("start");
+var startQuizBtn = document.getElementById("start-quiz-button");
+
+var questionDiv = document.getElementById("questionDiv");
+var questionTitle = document.getElementById("questionTitle");
+var choiceA = document.getElementById("btn0");
+var choiceB = document.getElementById("btn1");
+var choiceC = document.getElementById("btn2");
+var choiceD = document.getElementById("btn3");
+var answerCheck = document.getElementById("answerCheck");
+
+var summary = document.getElementById("summary");
 var enterInitialsSubmit = document.getElementById("submit-initials");
 var highScoresSection = document.getElementById("scores");
 var viewHighScores = document.getElementById("view-high-score");
 var everything = document.getElementById("everything");
 
+var highScoreDiv = document.getElementById("highScore");
 
 // define other variables
 var correctAns = 0;
@@ -113,7 +122,6 @@ var questionStart = 0;
  */
 
 // WHEN I click the start button, timer starts
-
 var totalTime = 121;
 function startCountDown() {
     // var incorrectPenalty = 10;
