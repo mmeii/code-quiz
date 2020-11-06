@@ -162,9 +162,10 @@ function checkAnswer(answer) {
     lineBreak.style.display = "block";
     answerCheck.style.display = "block";
 
-    if (answer === questions[questionIndex].choices[answer]) {
+    if (questions[questionIndex].answer === questions[questionIndex].choices[answer]) {
         // correct answer, add 1 score to final score
         correctAns++;
+        console.log(correctAns);
         answerCheck.textContent = "Correct!";
     } else {
         // wrong answer, deduct 10 second from timer
@@ -203,6 +204,7 @@ function chooseD() {
 function gameOver () {
     summary.style.display = "block";
     questionDiv.style.display = "none";
+    startDiv.style.display = "none";
     timer.textContent = "Time's Up!";
 
     // show final score
@@ -214,7 +216,7 @@ function gameOver () {
 function storeHighScore (event) {
     event.preventDefault();
     timer.style.display = "none";
-    summary.style.display = "none"
+    summary.style.display = "none";
     highScoreSection.style.display = "block";
 
     var initialInput = document.getElementById("initialInput");
@@ -229,8 +231,7 @@ function storeHighScore (event) {
     var highScoreString = JSON.stringify(highScore);
 
     // store scores into local storage
-    window.localStorage.setItem("high scores", highScoreString);
-    
+    window.localStorage.setItem("high scores", highScoreString);    
 }
 
 /**
@@ -243,6 +244,7 @@ choiceB.addEventListener("click", chooseB);
 choiceC.addEventListener("click", chooseC);
 choiceD.addEventListener("click", chooseD);
 submitInitialBtn.addEventListener("click", storeHighScore);
-goBackBtn.addEventListernr("click", function() {
+goBackBtn.addEventListener("click", function() {
     startDiv.style.display = "block";
+    highScoreSection.style.display = "none";
 })
