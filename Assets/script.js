@@ -87,7 +87,7 @@ const questions = [
  */
 
 // grab references to elements
-var time = document.getElementById("timer");
+var timer = document.getElementById("timer");
 var timeLeft = document.getElementById("timeLeft");
 
 var startDiv = document.getElementById("start");
@@ -102,12 +102,14 @@ var choiceD = document.getElementById("btn3");
 var answerCheck = document.getElementById("answerCheck");
 
 var summary = document.getElementById("summary");
-var enterInitialsSubmit = document.getElementById("submit-initials");
-var highScoresSection = document.getElementById("scores");
-var viewHighScores = document.getElementById("view-high-score");
+var submitInitialBtn = document.getElementById("submitInitialBtn");
 var everything = document.getElementById("everything");
 
-var highScoreDiv = document.getElementById("highScore");
+var highScoreSection = document.getElementById("highScoreSection");
+var highScore = document.getElementById("highScore");
+var goBackBtn = document.getElementById("goBackBtn");
+var clearHighScoreBtn = document.getElementById("clearHighScoreBtn"); 
+
 
 // define other variables
 var correctAns = 0;
@@ -121,7 +123,7 @@ var questionIndex = 0;
  */
 
 // WHEN I click the start button, timer starts
-var totalTime = 121;
+var totalTime = 151;
 function startCountDown() {
     startDiv.style.display = "none";
     showQuiz();
@@ -130,9 +132,8 @@ function startCountDown() {
         totalTime--;
         timeLeft.textContent = totalTime;
         if(totalTime <= 0) {
-            gameOver();
-            timer.textContent = "Time's Up!";
             clearInterval(startTimer);
+            gameOver();
         }
     },1000);
 };
@@ -177,9 +178,8 @@ function checkAnswer(answer) {
         questionIndex++;
         nextQuestion();
     } else {
-        // if no more question, show summary end game
-        summary.style.display = "block";
-        questionDiv.style.display = "none";
+        // if no more question, run game over function
+        gameOver();
     }
 }
 
@@ -201,16 +201,36 @@ function chooseD() {
 
 // when all questions are answered or timer reaches 0, game over
 function gameOver () {
+    summary.style.display = "block";
+    questionDiv.style.display = "none";
+    timer.textContent = "Time's Up!";
 
+    // show final score
+    var finalScore = document.getElementById("finalScore");
+    finalScore.textContent = correctAns;
 }
 
-// when game over, show all done, and show final score
+// enter initial and store highscore in local storage
+function storeHighScore (event) {
+    event.preventDefault();
+    timer.style.display = "none";
+    summary.style.display = "none"
+    highScoreSection.style.display = "block";
 
-// add input box to enter initial
+    var initialInput = document.getElementById("initialInput");
 
-// store highscore in local storage
-function storeHighScore () {
+    var userScores = {
+        initials: initialInput,
+        score: finalScore
+    };
 
+    highScore.push(userScores);
+
+    var highScoreString = JSON.stringify(highScore);
+
+    // store scores into local storage
+    window.localStorage.setItem("high scores", highScoreString);
+    
 }
 
 /**
@@ -222,4 +242,7 @@ choiceA.addEventListener("click", chooseA);
 choiceB.addEventListener("click", chooseB);
 choiceC.addEventListener("click", chooseC);
 choiceD.addEventListener("click", chooseD);
-
+submitInitialBtn.addEventListener("click", storeHighScore);
+goBackBtn.addEventListernr("click", function() {
+    startDiv.style.display = "block";
+})
