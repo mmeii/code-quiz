@@ -114,8 +114,7 @@ var correctAns = 0;
 var questionNum = 0;
 var scoreResult;
 var highScore = [];
-var questionStart = 0;
-
+var questionIndex = 0;
 
 /**
  * FUNCTIONS
@@ -124,82 +123,81 @@ var questionStart = 0;
 // WHEN I click the start button, timer starts
 var totalTime = 121;
 function startCountDown() {
+    startDiv.style.display = "none";
+    showQuiz();
     // var incorrectPenalty = 10;
     var startTimer = setInterval(function() {
         totalTime--;
         timeLeft.textContent = totalTime;
-        if(totalTime == 0) {
+        if(totalTime <= 0) {
             gameOver();
             timer.textContent = "Time's Up!";
             clearInterval(startTimer);
         }
     },1000);
-
-    // if (interval === 0) {
-    //     holdInterval = interval(function() {
-    //         totalTime--;
-    //         timeLeft.textContent = totalTime;
-
-    //         // when hits 0, game ends
-    //         if (timeLeft <= 0) {
-    //             clearInterval(holdInterval);
-    //             gameOver();
-    //             timeLeft.textContent = "Time Over!";
-    //         }
-    //     }, 1000);
-    // }
-    showQuiz(); 
 };
 
-// var timerId = setTimeout(function() {
-//     console.log("ex[ire")
-// }, 1000);
+// console.log(questions[questionIndex].question);
+// console.log(questions[questionIndex].choices);
 
-console.log(questions[questionStart].question);
-console.log(questions[questionStart].choices);
-
-// then presented with questions and choices, function to render questions and choices
-
+// then presented with questions and choices
 function showQuiz() {
-    function quiz(questions){
-        this.score = 0;
-        this.questions = questions;
-        this.questionIndex = 0;
-    }
-    quizQuestion.innerHTML = quiz.getQuestionIndex().text;
-
-    
+    questionDiv.style.display = "block";
+    nextQuestion();
 }
 
-// function render(questionStart) {
-//     quizQuestion.innerHTML = "";
-//     start.innerHTML = "";
-//     choices.innerHTML = "";
-//     var createChoices = document.createElement("ul");
-//     createChoices.innerHTML = "";
-//     for (var i = 0; i < questions.length; i++) {
-//         var quizQues = questions[questionStart].question;
-//         var choicesOption = questions[questionStart].choices;
-//         quizQuestion.textContent = quizQues;
-//         choices.textContent = choicesOption;
-//     }
-//     choicesOption.forEach(function (eachChoice) {
-//         var listChoice = document.createElement("li");
-//         listChoice.textContent = eachChoice;
-//         start.appendChild(choices);
-//         choices.appendChild(listChoice);
-//         listChoice.addEventListener("click", checkAnswer);
-//     })
-// }
+function nextQuestion() {
+    questionTitle.textContent = questions[questionIndex].question;
+    choiceA.textContent = questions[questionIndex].choices[0];
+    choiceB.textContent = questions[questionIndex].choices[1];
+    choiceC.textContent = questions[questionIndex].choices[2];
+    choiceD.textContent = questions[questionIndex].choices[3];
+}
 
 // after question is answered, show if correct or wrong
-function checkAnswer() {
+function checkAnswer(answer) {
 
-    // if wrong, time is subtracted from the clock
+    var lineBreak = document.getElementById("lineBreak");
+    lineBreak.style.display = "block";
+    answerCheck.style.display = "block";
 
+    if (answer === questions[questionIndex].choices[answer]) {
+        // correct answer, add 1 score to final score
+        correctAns++;
+        answerCheck.textContent = "Correct!";
+    } else {
+        // wrong answer, deduct 10 second from timer
+        totalTime -= 10;
+        timeLeft.textContent = totalTime;
+        answerCheck.textContent = "Wrong! The correct answer is: " + questions[questionIndex].answer;
+    }
+
+    // repeat with the rest of questions 
+    if (questionIndex < questions.length - 1) {
+        questionIndex++;
+        nextQuestion();
+    } else {
+        // if no more question, show summary end game
+        summary.style.display = "block";
+        questionDiv.style.display = "none";
+    }
 }
 
-// repeat with the rest of questions
+function chooseA() {
+    checkAnswer(0);
+}
+
+function chooseB() {
+    checkAnswer(1);
+}
+
+function chooseC() {
+    checkAnswer(2);
+}
+
+function chooseD() {
+    checkAnswer(3);
+}
 
 // when all questions are answered or timer reaches 0, game over
 function gameOver () {
@@ -215,13 +213,13 @@ function storeHighScore () {
 
 }
 
-// interval = setInterval(function()) {
-//     counter++;
-//     document.querySelector("#timer").textContent = counter;
-// }, 1000)
-
 /**
  * ADD EVENT LISTENERS
  */
 
 startQuizBtn.addEventListener("click", startCountDown);
+choiceA.addEventListener("click", chooseA);
+choiceB.addEventListener("click", chooseB);
+choiceC.addEventListener("click", chooseC);
+choiceD.addEventListener("click", chooseD);
+

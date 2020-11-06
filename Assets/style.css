@@ -18,10 +18,26 @@ a:hover {
     font-family: 'Archivo', sans-serif;
 }
 
+.btn:focus, .btn:active, .btn:visited {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #343a40;
+}
+
 span {
     font-family: 'Archivo', sans-serif;
 }
 
 p {
     font-family: 'Archivo', sans-serif;
+}
+
+#questionTitle {
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#answerCheck {
+    font-style: italic;
+    color: #4D5159;
 }
