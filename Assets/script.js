@@ -123,9 +123,11 @@ var questionIndex = 0;
 // WHEN I click the start button, timer starts
 var totalTime = 151;
 function newQuiz() {
+    correctAns = 0;
     questionIndex = 0;
     totalTime = 150;
     timeLeft.textContent = totalTime;
+    initialInput.value = "";
 
     startDiv.style.display = "none";
     questionDiv.style.display = "block";
@@ -300,6 +302,6 @@ goBackBtn.addEventListener("click", function() {
 
 clearHighScoreBtn.addEventListener("click", function(){
     window.localStorage.removeItem("high scores");
-    listOfHighScores.innerHTML = "High Scores are Cleared!";
+    listOfHighScores.innerHTML = "High Scores Cleared!";
     listOfHighScores.setAttribute("style", "font-family: 'Archivo', sans-serif; font-style: italic;")
 });
