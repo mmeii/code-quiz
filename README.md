@@ -1,6 +1,6 @@
 # Web APIs: Code Quiz
 
-This is a timed coding quiz with multiple-choice questions. This app features dynamically updated HTML and CSS powered by JavaScript written from scratch. Bootstrap is also used.
+This is a timed coding quiz with multiple-choice questions. This app is written from scratch.
 
 ## Installation
 1. Download or clone repository
@@ -8,7 +8,7 @@ This is a timed coding quiz with multiple-choice questions. This app features dy
 3. Use a text editor to view all coding, Visual Studio Coding is recommended.
    
 
-## Direction
+## Instructions
 1. Click "Start Quiz"
    * Timer on the top right will start to run
    * Total time is 150 second with 12 questions in total
@@ -18,6 +18,7 @@ This is a timed coding quiz with multiple-choice questions. This app features dy
 2. A series of questions are presented with multiple choice answers
    * If the question is answered wrong, 10 seconds will be deducted to the timer
    * If the question is answered correctly, will add 1 to the score
+   * After a question is answered, it will show on the bottom whether it is answered correctly or wrong. If wrong, will also show the correct answer.
   
 3. When all questions are answered or the timer reaches 0, game is over
    
@@ -27,9 +28,22 @@ This is a timed coding quiz with multiple-choice questions. This app features dy
    
 6. The user then will have the option to click on "Go Back" to start quiz again, or "Clear High Scores" to clear saved scores
 
+## Features
+* HTML
+* CSS
+* JavaScript
+* Bootstrap
+
+## Demo
+![Code Quiz Demo](Assets/code-quiz-demo.gif)
+
+
 ## Websites
 * Github: https://github.com/mmeii/4-code-quiz
 * Deployed: https://mmeii.github.io/4-code-quiz/
+
+## License
+MIT
   
 
 

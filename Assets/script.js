@@ -111,7 +111,6 @@ var clearHighScoreBtn = document.getElementById("clearHighScoreBtn");
 var viewHighScore = document.getElementById("viewHighScore");
 var listOfHighScores = document.getElementById("listOfHighScores");
 
-
 // define other variables
 var correctAns = 0;
 var questionNum = 0;
@@ -250,9 +249,6 @@ function storeHighScores(event) {
 
     // stringify array in order to store in local
     var scoresArrayString = JSON.stringify(scoresArray);
-    // console.log(highScoreString);
-
-    
     window.localStorage.setItem("high scores", scoresArrayString);
     
     // show current highscores
@@ -282,7 +278,6 @@ function showHighScores() {
 
     for (; i < storedHighScores.length; i++) {
         var eachNewHighScore = document.createElement("p");
-        // eachNewHighScore.setAttribute()
         eachNewHighScore.innerHTML = storedHighScores[i].initials + ": " + storedHighScores[i].score;
         listOfHighScores.appendChild(eachNewHighScore);
     }
