@@ -28,7 +28,7 @@
             <div id="timesUp" class="col text-right" style="display: none;">Time's Up!</div>
         </div>
 
-        <main class="row text-left">
+        <div id="everything" class="row text-left">
             <div class="col-md-2"></div>
               <main class="col-md-8 mt-5">
                   <!--start screen  -->
@@ -70,16 +70,17 @@
                     <h2 class="font-weight-bold pt-2 pb-3 mb-2">High Scores</h2>                   
                     
                     <div id="listOfHighScores" class="list-group list-group-flush pt-2 pb-3 mb-2"></div>
-                    <!-- add each highscore entry here as li -->
 
+                    <!-- append each highscore as new paragraph here -->
                     <p>
                         <button type="submit" class="btn btn-info mt-3 mr-3" id="goBackBtn">Go Back</button>
                         <button type="submit" class="btn btn-info mt-3" id="clearHighScoreBtn">Clear High Scores</button>
                     </p>
+                    
                 </div>
               </main>
             <div class="col-md-2"></div>
-        </main>
+        </div>
     </div>
 
     <!-- linking js -->

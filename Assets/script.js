@@ -101,6 +101,7 @@ var answerCheck = document.getElementById("answerCheck");
 var summary = document.getElementById("summary");
 var submitInitialBtn = document.getElementById("submitInitialBtn");
 var initialInput = document.getElementById("initialInput");
+var everything = document.getElementById("everything");
 
 var highScoreSection = document.getElementById("highScoreSection");
 var finalScore = document.getElementById("finalScore");
@@ -109,6 +110,7 @@ var goBackBtn = document.getElementById("goBackBtn");
 var clearHighScoreBtn = document.getElementById("clearHighScoreBtn"); 
 var viewHighScore = document.getElementById("viewHighScore");
 var listOfHighScores = document.getElementById("listOfHighScores");
+
 
 // define other variables
 var correctAns = 0;
@@ -123,11 +125,10 @@ var questionIndex = 0;
 // WHEN I click the start button, timer starts
 var totalTime = 151;
 function newQuiz() {
-    correctAns = 0;
     questionIndex = 0;
     totalTime = 150;
     timeLeft.textContent = totalTime;
-    initialInput.value = "";
+    initialInput.textContent = "";
 
     startDiv.style.display = "none";
     questionDiv.style.display = "block";
@@ -214,9 +215,10 @@ function gameOver() {
 }
 
 // enter initial and store highscore in local storage
-function storeHighScores() {
+function storeHighScores(event) {
+    event.preventDefault();
 
-    // stop function if initial is blank
+    // stop function is initial is blank
     if (initialInput.value === "") {
         alert("Please enter your initials!");
         return;
@@ -246,10 +248,10 @@ function storeHighScores() {
     console.log(userScore);
     scoresArray.push(userScore);
 
-    // stringify array in order to store in local storage
+    // stringify array in order to store in local
     var scoresArrayString = JSON.stringify(scoresArray);
-
     // console.log(highScoreString);
+
     
     window.localStorage.setItem("high scores", scoresArrayString);
     
@@ -259,16 +261,19 @@ function storeHighScores() {
 
 // function to show high scores
 var i = 0;
-function showHighScores() {
+function showHighScores(event) {
+    event.preventDefault();
+
     startDiv.style.display = "none";
     timer.style.display = "none";
+    questionDiv.style.display = "none";
     timesUp.style.display = "none";
     summary.style.display = "none";
     highScoreSection.style.display = "block";
 
     var savedHighScores = localStorage.getItem("high scores");
 
-    // check if there is any stored in local storage
+    // check if there is any in local storage
     if (savedHighScores === null) {
         return;
     }
@@ -278,6 +283,7 @@ function showHighScores() {
 
     for (; i < storedHighScores.length; i++) {
         var eachNewHighScore = document.createElement("p");
+        // eachNewHighScore.setAttribute()
         eachNewHighScore.innerHTML = storedHighScores[i].initials + ": " + storedHighScores[i].score;
         listOfHighScores.appendChild(eachNewHighScore);
     }
