@@ -101,24 +101,19 @@ var answerCheck = document.getElementById("answerCheck");
 var summary = document.getElementById("summary");
 var submitInitialBtn = document.getElementById("submitInitialBtn");
 var initialInput = document.getElementById("initialInput");
-var everything = document.getElementById("everything");
 
 var highScoreSection = document.getElementById("highScoreSection");
 var finalScore = document.getElementById("finalScore");
-var highScore = document.getElementById("highScore");
-
 
 var goBackBtn = document.getElementById("goBackBtn");
 var clearHighScoreBtn = document.getElementById("clearHighScoreBtn"); 
 var viewHighScore = document.getElementById("viewHighScore");
 var listOfHighScores = document.getElementById("listOfHighScores");
 
-
 // define other variables
 var correctAns = 0;
 var questionNum = 0;
 var scoreResult;
-var highScores = [];
 var questionIndex = 0;
 
 /**
@@ -218,23 +213,26 @@ function gameOver() {
 
 // enter initial and store highscore in local storage
 function storeHighScores() {
+
+    // stop function if initial is blank
     if (initialInput.value === "") {
         alert("Please enter your initials!");
         return;
     } 
-    // event.preventDefault();
+
     startDiv.style.display = "none";
     timer.style.display = "none";
     timesUp.style.display = "none";
     summary.style.display = "none";
     highScoreSection.style.display = "block";   
 
+    // store scores into local storage
     var savedHighScores = localStorage.getItem("high scores");
     var scoresArray;
 
     if (savedHighScores === null) {
         scoresArray = [];
-    }else {
+    } else {
         scoresArray = JSON.parse(savedHighScores)
     }
 
@@ -243,13 +241,14 @@ function storeHighScores() {
         score: finalScore.textContent
     };
 
-
     console.log(userScore);
     scoresArray.push(userScore);
 
+    // stringify array in order to store in local storage
     var scoresArrayString = JSON.stringify(scoresArray);
+
     // console.log(highScoreString);
-    // store scores into local storage
+    
     window.localStorage.setItem("high scores", scoresArrayString);
     
     // show current highscores
@@ -267,28 +266,17 @@ function showHighScores() {
 
     var savedHighScores = localStorage.getItem("high scores");
 
-    // check if there is any in local storage
+    // check if there is any stored in local storage
     if (savedHighScores === null) {
         return;
     }
     console.log(savedHighScores);
 
     var storedHighScores = JSON.parse(savedHighScores);
-    highScores = storedHighScores;
 
-    // loop for new highscores and append to show
-
-    // highScores.forEach(function (newHighScore) {
-    //     var newHighScoreEntry = document.createElement("li");
-    //     newHighScoreEntry.textContent = newHighScore;
-    //     listOfHighScores.appendChild("createLi");
-    //     createLi.appendChild(newHighScoreEntry);
-    // })
-
-    for (; i < highScores.length; i++) {
+    for (; i < storedHighScores.length; i++) {
         var eachNewHighScore = document.createElement("p");
-        // eachNewHighScore.setAttribute()
-        eachNewHighScore.innerHTML = highScores[i].initials + ": " + highScores[i].score;
+        eachNewHighScore.innerHTML = storedHighScores[i].initials + ": " + storedHighScores[i].score;
         listOfHighScores.appendChild(eachNewHighScore);
     }
 }
@@ -312,6 +300,6 @@ goBackBtn.addEventListener("click", function() {
 
 clearHighScoreBtn.addEventListener("click", function(){
     window.localStorage.removeItem("high scores");
-    listOfHighScores.innerHTML = "High Score Cleared!";
+    listOfHighScores.innerHTML = "High Scores are Cleared!";
     listOfHighScores.setAttribute("style", "font-family: 'Archivo', sans-serif; font-style: italic;")
 });
