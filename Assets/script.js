@@ -261,8 +261,7 @@ function storeHighScores(event) {
 
 // function to show high scores
 var i = 0;
-function showHighScores(event) {
-    event.preventDefault();
+function showHighScores() {
 
     startDiv.style.display = "none";
     timer.style.display = "none";
@@ -298,8 +297,14 @@ choiceA.addEventListener("click", chooseA);
 choiceB.addEventListener("click", chooseB);
 choiceC.addEventListener("click", chooseC);
 choiceD.addEventListener("click", chooseD);
-submitInitialBtn.addEventListener("click", storeHighScores);
-viewHighScore.addEventListener("click", showHighScores);
+
+submitInitialBtn.addEventListener("click", function(event){ 
+    storeHighScores(event);
+});
+
+viewHighScore.addEventListener("click", function(event) { 
+    showHighScores(event);
+});
 
 goBackBtn.addEventListener("click", function() {
     startDiv.style.display = "block";
