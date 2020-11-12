@@ -1,4 +1,4 @@
-# Web APIs: Code Quiz
+# Code Quiz
 
 This is a timed coding quiz with multiple-choice questions. This app is written from scratch.
 
