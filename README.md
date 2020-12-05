@@ -39,8 +39,8 @@ This is a timed coding quiz with multiple-choice questions. This app is written 
 
 
 ## Websites
-* Github: https://github.com/mmeii/4-code-quiz
-* Deployed: https://mmeii.github.io/4-code-quiz/
+* Github: https://github.com/mmeii/code-quiz
+* Deployed: https://mmeii.github.io/code-quiz/
 
 ## License
 MIT
